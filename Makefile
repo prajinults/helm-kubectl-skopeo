@@ -8,7 +8,7 @@ include .env
 VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env )
 $(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
 DOCKER_IMAGE ?= prajinults/helm-kubectl-skopeo
-DOCKER_TAG ?= `git rev-parse --abbrev-ref HEAD`
+DOCKER_TAG ?= `git describe --tags --abbrev=0`
 
 docker_build:
 	@docker buildx build \
